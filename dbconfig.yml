@@ -1,0 +1,9 @@
+development:
+  dialect: postgres
+  dir: db/migrations
+  datasource: test.db
+
+production:
+  dialect: postgres
+  dir: db/migrations
+  table: migrations
