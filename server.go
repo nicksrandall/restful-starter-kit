@@ -55,17 +55,19 @@ func buildRouter(db *sqlx.DB) chi.Router {
 	_ = tokenAuth
 
 	router.Use(middleware.Heartbeat("/ping"))
+	router.Post("/auth", apis.Auth(tokenAuth))
 
 	router.Route("/v1", func(r chi.Router) {
-		router.Use(
+		r.Use(
 			middleware.RequestID,
 			middleware.RealIP,
 			middleware.Recoverer,
 			corsConfig.Handler,
 			app.LoggerMiddleware(app.Logger(nil)),
 			app.DBMiddleware(db),
-			// jwtauth.Verifier(tokenAuth),
-			// jwtauth.Authenticator,
+			middleware.DefaultCompress,
+			jwtauth.Verifier(tokenAuth),
+			jwtauth.Authenticator,
 		)
 
 		apis.ServeArtistResource(r, &services.ArtistService{})

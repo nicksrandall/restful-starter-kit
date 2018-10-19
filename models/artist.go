@@ -1,11 +1,14 @@
 package models
 
-import validation "github.com/go-ozzo/ozzo-validation"
+import (
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/gofrs/uuid"
+)
 
 // Artist represents an artist record.
 type Artist struct {
-	Id   int    `json:"id" db:"id"`
-	Name string `json:"name" db:"name"`
+	ID   uuid.UUID `json:"id" db:"id"`
+	Name string    `json:"name" db:"name"`
 }
 
 // Validate validates the Artist fields.

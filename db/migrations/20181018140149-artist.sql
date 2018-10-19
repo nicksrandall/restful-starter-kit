@@ -1,6 +1,6 @@
 -- +migrate Up
 CREATE TABLE artist (
-  id INT PRIMARY KEY NOT NULL,
+  id UUID PRIMARY KEY NOT NULL,
   name TEXT NOT NULL
 );
 
