@@ -4,7 +4,7 @@ PACKAGES:=$(shell go list ./... | sed -n '1!p' | grep -v /vendor/)
 
 default: run
 
-depends:
+dep:
 	dep ensure
 
 test:
@@ -20,7 +20,7 @@ run:
 	go run server.go
 
 build: clean
-	go build -a -o server server.go
+	go build -o server server.go
 
 clean:
 	rm -rf server coverage.out coverage-all.out
